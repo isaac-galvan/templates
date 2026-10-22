@@ -1,0 +1,27 @@
+[
+  {
+    "id": "example-summarize",
+    "title": "EXAMPLE: Summarize text",
+    "body": "Summarize the following text for {audience|a busy executive} in {length|5 bullet points}. Keep the tone {tone|neutral}.\n\nText:\n{text}"
+  },
+  {
+    "id": "example-email",
+    "title": "EXAMPLE: Draft an email reply",
+    "body": "Write a reply to the email below. I want to {goal}. Keep it {tone|friendly and brief}. Sign it as {my name|Isaac}.\n\nEmail:\n{{email}}"
+  },
+  {
+    "id": "example-explain",
+    "title": "EXAMPLE: Explain a concept",
+    "body": "Explain {topic} to me like I'm {level|a smart beginner}. Use one concrete analogy, then give a short example. Finish with three questions to check that I understood {topic}."
+  },
+  {
+    "id": "example-code-review",
+    "title": "EXAMPLE: Review code",
+    "body": "You are a senior {language|Python} engineer. Review this code for bugs, readability, and performance. Return a prioritized list of issues with fixes.\n\n```\n{code}\n```"
+  },
+  {
+    "id": "example-rewrite",
+    "title": "EXAMPLE: Rewrite in a tone (dropdown)",
+    "body": "Rewrite the text below in a {tone:formal,casual,friendly,direct and blunt|casual} tone for {platform:email,Slack,LinkedIn post,text message}. Keep it under {length:50 words,100 words,200 words|100 words}. Keep these words exactly: {keep words|none}.\n\nText:\n{text}"
+  }
+]

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prompt Filler</title>
+  <meta name="description" content="Fill in AI prompt templates and copy them.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111114" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Prompts">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button id="backBtn" class="icon-btn" aria-label="Back" hidden>‹ Back</button>
+    <h1 id="title">Prompts</h1>
+    <div class="top-actions">
+      <button id="menuBtn" class="icon-btn" aria-label="Import or export">⋯</button>
+      <button id="newBtn" class="icon-btn primary-text" aria-label="New template">＋</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- List view -->
+    <section id="listView" class="view">
+      <input id="search" class="search" type="search" placeholder="Search templates" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Search templates">
+      <ul id="templateList" class="list"></ul>
+      <p id="emptyMsg" class="muted center" hidden>No templates match.</p>
+    </section>
+
+    <!-- Fill view -->
+    <section id="fillView" class="view" hidden>
+      <div id="fields" class="fields"></div>
+      <p id="noFields" class="muted" hidden>This template has no blanks. Copy it as-is.</p>
+      <div class="row-between">
+        <h2 class="section-label">Preview</h2>
+        <div class="inline-actions">
+          <button id="clearBtn" class="link-btn">Clear</button>
+          <button id="editBtn" class="link-btn">Edit</button>
+        </div>
+      </div>
+      <pre id="preview" class="preview" aria-live="polite"></pre>
+      <div class="copy-bar">
+        <button id="copyBtn" class="copy-btn">Copy</button>
+      </div>
+    </section>
+
+    <!-- Edit view -->
+    <section id="editView" class="view" hidden>
+      <label class="field">
+        <span class="label">Title</span>
+        <input id="editTitle" type="text" autocomplete="off" placeholder="e.g. Summarize an article">
+      </label>
+      <label class="field">
+        <span class="label">Prompt</span>
+        <textarea id="editBody" rows="12" placeholder="Write your prompt. Use {blank} or {blank|default} for fill-ins."></textarea>
+      </label>
+      <p class="muted small">Blanks found: <span id="editBlanks">none</span></p>
+      <div class="hint small muted">
+        <code>{topic}</code> text blank · <code>{tone|friendly}</code> with default<br>
+        <code>{tone:formal,casual,friendly}</code> dropdown · add <code>|casual</code> to preselect<br>
+        Use <code>\,</code> for a comma inside an option.
+      </div>
+      <button id="saveBtn" class="copy-btn">Save</button>
+      <div class="edit-secondary">
+        <button id="dupBtn" class="secondary-btn">Duplicate</button>
+        <button id="delBtn" class="secondary-btn danger">Delete</button>
+      </div>
+    </section>
+
+    <!-- Data view (import / export) -->
+    <section id="dataView" class="view" hidden>
+      <h2 class="section-label">Export</h2>
+      <p class="muted small">Save all templates as a JSON file. Use this to back up or move templates between Safari and the Home Screen app.</p>
+      <button id="exportBtn" class="secondary-btn wide">Export / Share JSON</button>
+      <button id="copyJsonBtn" class="secondary-btn wide">Copy JSON to clipboard</button>
+
+      <h2 class="section-label">Import</h2>
+      <button id="importFileBtn" class="secondary-btn wide">Choose JSON file…</button>
+      <input id="importFile" type="file" accept="application/json,.json,text/plain" hidden>
+      <textarea id="importText" rows="6" placeholder='…or paste JSON here: [{"title":"…","body":"…"}]'></textarea>
+      <label class="check"><input id="replaceAll" type="checkbox"> Replace all existing templates</label>
+      <button id="importBtn" class="secondary-btn wide">Import pasted JSON</button>
+
+      <h2 class="section-label">Reset</h2>
+      <button id="resetBtn" class="secondary-btn wide danger">Restore example templates</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
